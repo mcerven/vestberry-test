@@ -8,6 +8,8 @@ const {
   GraphQLError,
 } = require('graphql')
 const casual = require('casual')
+const sectors = require('../common/models/sectors');
+const stages = require('../common/models/stages');
 
 const CompanyType = new GraphQLObjectType({
   name: 'Company',
@@ -39,8 +41,6 @@ const CompanyType = new GraphQLObjectType({
   },
 })
 
-const sectors = ['Fintech', 'IOT', 'Roboadvisory', 'Insuretech']
-const stages = ['Idea', 'Prototype', 'Seed', 'Series A', 'Series B', 'Series C']
 const companies = [...Array(Math.round(Math.random() * 3 + 1)).keys()]
   .map((_, id) => ({
     id,
@@ -93,7 +93,7 @@ const addCompany = (obj, company) => {
   }
   companies.push({
     id: companies.length,
-    company,
+    ...company,
   })
   return company
 }

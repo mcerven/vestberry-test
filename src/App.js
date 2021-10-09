@@ -1,7 +1,7 @@
 import React from 'react'
 import {ApolloProvider} from '@apollo/client'
-import Page from './Page'
-import client from './apollo'
+import Page from './pages/Page'
+import client from './apollo/apollo'
 import styles from 'App.scss'
 
 const App = () =>
