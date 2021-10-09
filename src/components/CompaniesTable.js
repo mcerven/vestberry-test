@@ -35,7 +35,9 @@ const CompaniesTable = ({ companies, refetch }) => {
             ))}
           </tbody>
         </table>
-        <button className={styles.button} onClick={() => setShowNewCompanyModal(true)}>Add new company</button>
+        <div className={styles.actions}>
+          <button className={styles.button} onClick={() => setShowNewCompanyModal(true)}>Add new company</button>
+        </div>
         { showNewCompanyModal && 
           <Modal handleClose={handleClose}>
             <NewCompany handleCompanyAdded={handleCompanyAdded} />

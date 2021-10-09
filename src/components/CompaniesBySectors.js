@@ -32,16 +32,18 @@ const CompanySector = ({sector, count}) => {
 
   return (
     <div className={styles.companySector}>
-      <div className={styles.companySectorCount}>
-        {count}
-      </div>
-      <div className={styles.companySectorText}>
-        {sector}
-      </div>
-      <div className={styles.companySectorText}>
-        <Suspense fallback={<div>Loading...</div>}>
-          <Icon width="24" height="24" />
-        </Suspense>
+      <div className={styles.companySectorContent}>
+        <div className={styles.companySectorCount}>
+          {count}
+        </div>
+        <div className={styles.companySectorText}>
+          {sector}
+        </div>
+        <div className={styles.companySectorText}>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Icon width="28" height="28" />
+          </Suspense>
+        </div>
       </div>
     </div>
   )

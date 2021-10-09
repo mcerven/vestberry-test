@@ -69,12 +69,14 @@ const NewCompany = ({handleCompanyAdded}) => {
           <label>
             <span>Investment size</span>
             <div style={{position: 'relative'}}>
-              <input type="number" placeholder="Investment size" value={investmentSize} onChange={e => setInvestmentSize(e.target.value)} />
+              <input type="number" placeholder="Investment size" value={investmentSize} onChange={e => setInvestmentSize(e.target.value)} required />
               <div className={styles.placeholderRight}>EUR</div>
             </div>
           </label>
         </div>
-        <button type="submit" className={`${styles.button} ${styles.buttonPrimary}`}>Add new company</button>
+        <div className={styles.actions}>
+          <button type="submit" className={`${styles.button} ${styles.buttonPrimary}`}>Add new company</button>
+        </div>
       </form>
       {loading && 'Loading'}
       {error && `Error: ${error.message}`}
