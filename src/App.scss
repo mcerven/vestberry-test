@@ -68,26 +68,25 @@ body {
     }
 }
 
-
 .section {
     margin: 20px;
     background: var(--background-color-primary);
     box-shadow: 0 0 4px 1px var(--border-color);
     display: flex;
     flex-direction: column;
-}
 
-.sectionTitle {
-    background: var(--background-color-secondary);
-    color: var(--text-color-primary);
-    font-size: 1rem;
-    text-transform: uppercase;
-    font-weight: 500;
-    box-shadow: 0px 1px 0px var(--border-color);
-}
-
-.sectionTitle, .sectionContent {
-    padding: 20px;
+    .sectionTitle {
+        background: var(--background-color-secondary);
+        color: var(--text-color-primary);
+        font-size: 1rem;
+        text-transform: uppercase;
+        font-weight: 500;
+        box-shadow: 0px 1px 0px var(--border-color);
+    }
+    
+    .sectionTitle, .sectionContent {
+        padding: 20px;
+    }
 }
 
 .button {
