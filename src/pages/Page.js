@@ -25,11 +25,11 @@ export const Page = () => {
   const {companies} = companyData
 
   return (
-    <div>
+    <>
       <CompaniesBySectors companies={companies} />
       <InvestmentSize companies={companies} />
       <CompaniesTable companies={companies} refetch={refetch} />
-    </div>
+    </>
   )
 }
 
