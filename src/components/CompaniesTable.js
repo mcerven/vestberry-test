@@ -11,6 +11,10 @@ const CompaniesTable = ({ companies, refetch }) => {
     refetch()
     handleClose()
   }
+  const numberToCurrency = (value) => {
+    const numberFormat = new Intl.NumberFormat('sk-SK');
+    return `${numberFormat.format(value)} EUR`;
+  }
 
   return (
     <div className={styles.section}>
@@ -18,19 +22,23 @@ const CompaniesTable = ({ companies, refetch }) => {
         <table className={styles.table}>
           <thead className={styles.sectionTitle}>
             <tr>
-              <th>COMPANY NAME</th>
-              <th>STAGE</th>
-              <th>SECTOR</th>
-              <th>INVESTMENT SIZE</th>
+              <th />
+              <th className={styles.alignLeft}>Company name</th>
+              <th>Stage</th>
+              <th>Sector</th>
+              <th>Investment size</th>
+              <th />
             </tr>
           </thead>
           <tbody>
             {companies.map((company, i) => (
               <tr key={i}>
-                <td>{company.name}</td>
-                <td>{company.stage}</td>
-                <td>{company.sector}</td>
-                <td>{company.investmentSize}</td>
+                <td />
+                <td className={`${styles.alignLeft} ${styles.borderBottom}`}>{company.name}</td>
+                <td className={styles.borderBottom}>{company.stage}</td>
+                <td className={styles.borderBottom}>{company.sector}</td>
+                <td className={styles.borderBottom}>{numberToCurrency(company.investmentSize)}</td>
+                <td />
               </tr>
             ))}
           </tbody>
