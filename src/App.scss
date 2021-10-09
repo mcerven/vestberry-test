@@ -1,5 +1,21 @@
+:root {
+    --text-color-primary: #6a99a0;
+    --text-color-secondary: black;
+    --background-color-primary: white;
+    --background-color-secondary: #f7f9fc;
+    --border-color: #ccc;
+}
+
 html,
 body {
+    padding: 0;
+    margin: 0;
+    background: rgb(235, 238, 247);
+    font-family: sans-serif;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
     padding: 0;
     margin: 0;
 }
@@ -15,10 +31,10 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    color: #ffffff;
+    color: var(--background-color-primary);
     background-color: #2a2d33;
     width: 100%;
-    padding: 20px;
+    padding: 20px 0;
     text-align: center;
     font-family: Arial;
     font-size: 18px;
@@ -27,4 +43,156 @@ body {
     text-align: center;
 }
 
-.content {}
+.modalBackdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dialog {
+    position: fixed;
+    top: 150px;
+    padding: 80px 200px;
+    background: var(--background-color-primary);
+    display: flex;
+    justify-content: center;
+}
+
+.section {
+    margin: 15px;
+    background: var(--background-color-primary);
+    box-shadow: 0 0 6px 2px var(--border-color);
+    display: flex;
+    flex-direction: column;
+}
+
+.sectionTitle {
+    background: var(--background-color-secondary);
+    color: #6a99a0;
+    font-size: 1rem;
+    text-transform: uppercase;
+    font-weight: 500;
+    box-shadow: 0px 1px 0px var(--border-color);
+}
+
+.sectionTitle, .sectionContent {
+    padding: 18px;
+}
+
+.button {
+    cursor: pointer;
+    background: var(--background-color-primary);
+    color: var(--text-color-secondary);
+    padding: 10px 25px;
+    border: 1px solid var(--border-color);
+    border-radius: 3px;
+}
+
+.buttonPrimary {
+    background: var(--text-color-primary);
+    color: white;
+}
+
+.companySectors {
+    display: flex;
+    justify-content: stretch;
+}
+
+.companySector {
+    display: flex;
+    flex-direction: column;
+
+    .companySectorCount {
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+
+    .companySectorText {
+        color: var(--text-color-primary);
+    }
+}
+
+.table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 10px;
+    margin: 0 -10px;
+    
+    thead, tbody {
+        padding: 18px;
+    }
+
+    th, td {
+        text-align: right;
+    }
+    
+    th:first-of-type, td:first-of-type {
+        text-align: left;
+    }
+
+    tr {
+        border-bottom: 1px solid var(--border-color);
+    }
+}
+
+.newCompany {
+    h2 {
+        font-size: 1.2rem;
+        color: var(--text-color-primary);
+        text-transform: uppercase;
+        text-align: center;
+    }
+}
+
+.form {
+    .formField {
+        margin: 15px 0;
+
+        label span {
+            display: block;
+            color: var(--text-color-secondary);
+        }
+        
+        input, select {
+            position: relative;
+            padding: 6px 15px;
+            width: 320px;
+            margin: 3px 0;
+            border: 2px solid var(--border-color);
+            border-radius: 5px;
+        }
+
+        .placeholderRight {
+            position: absolute;
+            font-size: 0.8rem;
+            right: 7px;
+            top: 12px;
+            color: gray;
+        }
+        
+        /* Chrome, Safari, Edge, Opera */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+        }
+
+        /* Firefox */
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+
+        select:required:invalid {
+            color: #666;
+        }
+
+        option {
+            color: var(--text-color-secondary);
+        }
+    }
+}
