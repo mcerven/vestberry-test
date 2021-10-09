@@ -1,17 +1,17 @@
 import React, {useState} from 'react'
 import {useMutation} from '@apollo/client'
-import {ADD_COMPANY} from '../apollo/queries/Page.queries';
-import stages from '../../common/models/stages';
-import sectors from '../../common/models/sectors';
+import {ADD_COMPANY} from '../apollo/queries/Page.queries'
+import stages from '../../common/models/stages'
+import sectors from '../../common/models/sectors'
 import styles from 'App.scss'
 
 const NewCompany = ({handleCompanyAdded}) => {
-  const [name, setName] = useState('');
-  const [stage, setStage] = useState('');
-  const [sector, setSector] = useState('');
-  const [investmentSize, setInvestmentSize] = useState('');
+  const [name, setName] = useState('')
+  const [stage, setStage] = useState('')
+  const [sector, setSector] = useState('')
+  const [investmentSize, setInvestmentSize] = useState('')
 
-  const [addCompany, {loading, error}] = useMutation(ADD_COMPANY);
+  const [addCompany, {loading, error}] = useMutation(ADD_COMPANY)
 
   const handleSubmit = async (e) => {
     e.preventDefault()

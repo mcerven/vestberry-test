@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import Modal from './Modal';
+import React, {useState} from 'react'
+import Modal from './Modal'
 import NewCompany from './NewCompany'
 import styles from 'App.scss'
 
@@ -12,8 +12,8 @@ const CompaniesTable = ({ companies, refetch }) => {
     handleClose()
   }
   const numberToCurrency = (value) => {
-    const numberFormat = new Intl.NumberFormat('sk-SK');
-    return `${numberFormat.format(value)} EUR`;
+    const numberFormat = new Intl.NumberFormat('sk-SK')
+    return `${numberFormat.format(value)} EUR`
   }
 
   return (
@@ -53,7 +53,7 @@ const CompaniesTable = ({ companies, refetch }) => {
         }
       </div>
     </div>
-  );
-};
+  )
+}
 
 export default CompaniesTable

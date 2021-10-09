@@ -1,5 +1,5 @@
 import React from 'react'
-import { Chart } from "react-google-charts";
+import { Chart } from "react-google-charts"
 import styles from 'App.scss'
 
 const InvestmentSize = ({companies}) => {
@@ -38,4 +38,4 @@ const InvestmentSize = ({companies}) => {
   )
 }
 
-export default InvestmentSize;
+export default InvestmentSize

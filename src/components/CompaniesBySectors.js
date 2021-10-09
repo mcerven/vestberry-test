@@ -28,7 +28,7 @@ export default CompaniesBySectors
 const CompanySector = ({sector, count}) => {
   if (!sector) return null
 
-  const Icon = React.lazy(() => import(`../../Assets/Assetts/Icons/ico_${sector.toLowerCase()}.svg`));
+  const Icon = React.lazy(() => import(`../../Assets/Assetts/Icons/ico_${sector.toLowerCase()}.svg`))
 
   return (
     <div className={styles.companySector}>
