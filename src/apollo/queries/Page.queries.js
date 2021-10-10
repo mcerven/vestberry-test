@@ -30,3 +30,13 @@ export const DELETE_COMPANY = gql`
       investmentSize
     }
   }`
+
+export const UPDATE_COMPANY = gql`
+  mutation UPDATE_COMPANY ($id: ID!, $name: String!, $stage: String!, $sector: String!, $investmentSize: Int!) {
+    updateCompany(id: $id, name: $name, stage: $stage, sector: $sector, investmentSize: $investmentSize) {
+      name
+      stage
+      sector
+      investmentSize
+    }
+  }`

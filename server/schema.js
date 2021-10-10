@@ -79,32 +79,25 @@ const query = new GraphQLObjectType({
 })
 
 const addCompany = (obj, company) => {
-  if (company.name.length <= 2) {
-    throw new GraphQLError('Company name has to be longer then 2 characters')
-  }
-  if (stages.indexOf(company.stage) === -1) {
-    throw new GraphQLError('Company stage must be in the list')
-  }
-  if (sectors.indexOf(company.sector) === -1) {
-    throw new GraphQLError('Company sector must be in the list')
-  }
-  if (company.investmentSize < 0) {
-    throw new GraphQLError('Investment size has to be positive number')
-  }
+  validateCompany(company);
   companies.push({
-    id: companies.length,
     ...company,
+    id: Math.round(Math.random() * 10000000),
   })
   return company
 }
 
-const deleteCompany = (obj, {id}) => {
-  const company = companies.find(c => c.id == id)
-  if (company === undefined) {
-    throw new GraphQLError(`Company with id '${id}' does not exist`)
-  }
-  companies = companies.filter(c => c.id != id)
+const updateCompany = (obj, company) => {
+  const dbCompany = findCompanyById(company.id);
+  validateCompany(company);
+  Object.assign(dbCompany, company)
   return company
+}
+
+const deleteCompany = (obj, {id}) => {
+  const dbCompany = findCompanyById(id);
+  companies = companies.filter(c => c.id != id)
+  return dbCompany
 }
 
 const mutation = new GraphQLObjectType({
@@ -133,6 +126,32 @@ const mutation = new GraphQLObjectType({
       },
       resolve: addCompany,
     },
+    updateCompany: {
+      type: CompanyType,
+      args: {
+        id: {
+          type: GraphQLID,
+          name: 'id',
+        },
+        name: {
+          type: GraphQLString,
+          name: 'name',
+        },
+        stage: {
+          type: GraphQLString,
+          name: 'stage',
+        },
+        sector: {
+          type: GraphQLString,
+          name: 'sector',
+        },
+        investmentSize: {
+          type: GraphQLInt,
+          name: 'investmentSize',
+        },
+      },
+      resolve: updateCompany,
+    },
     deleteCompany: {
       type: CompanyType,
       args: {
@@ -145,6 +164,29 @@ const mutation = new GraphQLObjectType({
     },
   },
 })
+
+const validateCompany = (company) => {
+  if (company.name.length <= 2) {
+    throw new GraphQLError('Company name has to be longer than 2 characters');
+  }
+  if (stages.indexOf(company.stage) === -1) {
+    throw new GraphQLError('Company stage must be in the list');
+  }
+  if (sectors.indexOf(company.sector) === -1) {
+    throw new GraphQLError('Company sector must be in the list');
+  }
+  if (company.investmentSize < 0) {
+    throw new GraphQLError('Investment size has to be positive number');
+  }
+}
+
+const findCompanyById = (id) => {
+  const dbCompany = companies.find(c => c.id == id);
+  if (!dbCompany) {
+    throw new GraphQLError(`Company with id '${id}' does not exist`);
+  }
+  return dbCompany;
+}
 
 const schema = new GraphQLSchema({
   query,

@@ -1,18 +1,31 @@
 import React, {useState} from 'react'
 import Modal from './Modal'
 import NewCompany from './NewCompany'
+import UpdateCompany from './UpdateCompany'
+import CompanyTableRow from './CompanyTableRow'
 import styles from 'App.scss'
 import {useMutation} from '@apollo/client'
 import {DELETE_COMPANY} from '../apollo/queries/Page.queries'
 
 const CompaniesTable = ({ companies, refetch }) => {
+  const [selectedCompany, setSelectedCompany] = useState(null)
   const [showNewCompanyModal, setShowNewCompanyModal] = useState(false)
+  const [showUpdateCompanyModal, setShowUpdateCompanyModal] = useState(false)
   const [deleteCompany, {error}] = useMutation(DELETE_COMPANY)
   
-  const handleClose = () => setShowNewCompanyModal(false)
-  const handleCompanyAdded = () => {
+  const handleNewCompanyModalClose = () => setShowNewCompanyModal(false)
+  const handleNewCompanySaved = () => {
     refetch()
-    handleClose()
+    handleNewCompanyModalClose()
+  }
+  const handleUpdateCompanyModalClose = () => setShowUpdateCompanyModal(false)
+  const handleUpdateCompanySaved = () => {
+    refetch()
+    handleUpdateCompanyModalClose()
+  }
+  const handleShowUpdateCompanyModal = (company) => {
+    setSelectedCompany(company)
+    setShowUpdateCompanyModal(true)
   }
 
   const handleDeleteCompany = async (id) => {
@@ -23,11 +36,6 @@ const CompaniesTable = ({ companies, refetch }) => {
     catch (err) {
       console.error(err)
     }
-  }
-
-  const numberToCurrency = (value) => {
-    const numberFormat = new Intl.NumberFormat('sk-SK')
-    return `${numberFormat.format(value)} EUR`
   }
 
   return (
@@ -46,30 +54,27 @@ const CompaniesTable = ({ companies, refetch }) => {
             </tr>
           </thead>
           <tbody>
-            {companies.map((company, i) => (
-              <tr key={i}>
-                <td />
-                <td className={`${styles.alignLeft} ${styles.borderBottom}`}>{company.name}</td>
-                <td className={styles.borderBottom}>{company.stage}</td>
-                <td className={styles.borderBottom}>{company.sector}</td>
-                <td className={styles.borderBottom}>{numberToCurrency(company.investmentSize)}</td>
-                <td className={`${styles.iconButton} ${styles.borderBottom}`}>
-                  <div role="button" onClick={() => handleDeleteCompany(company.id)}>✕</div>
-                </td>
-                <td />
-              </tr>
-            ))}
+            {companies.map((company) => 
+              <CompanyTableRow key={company.id} company={company} handleShowUpdateCompanyModal={handleShowUpdateCompanyModal} handleDelete={handleDeleteCompany} />
+            )}
           </tbody>
         </table>
         <div className={styles.errorMessage}>{error && error.message}</div>
         <div className={styles.actions}>
           <button className={styles.button} onClick={() => setShowNewCompanyModal(true)}>Add new company</button>
         </div>
-        { showNewCompanyModal && 
-          <Modal handleClose={handleClose}>
-            <NewCompany handleCompanyAdded={handleCompanyAdded} />
-          </Modal>
-        }
+        <div className="modals">
+          { showNewCompanyModal && 
+            <Modal handleClose={handleNewCompanyModalClose}>
+              <NewCompany handleSave={handleNewCompanySaved} />
+            </Modal>
+          }
+          { showUpdateCompanyModal && 
+            <Modal handleClose={handleUpdateCompanyModalClose}>
+              <UpdateCompany handleSave={handleUpdateCompanySaved} company={selectedCompany} />
+            </Modal>
+          }
+        </div>
       </div>
     </div>
   )

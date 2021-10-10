@@ -1,17 +1,17 @@
 import React from 'react'
 import {useMutation} from '@apollo/client'
-import {ADD_COMPANY} from '../apollo/queries/Page.queries'
+import {UPDATE_COMPANY} from '../apollo/queries/Page.queries'
 import styles from 'App.scss'
 import CompanyForm from './CompanyForm'
 
-const NewCompany = ({handleSave}) => {
-  const [addCompany, {loading, error}] = useMutation(ADD_COMPANY)
+const UpdateCompany = ({handleSave, company}) => {
+  const [updateCompany, {loading, error}] = useMutation(UPDATE_COMPANY)
 
   const handleSubmit = async (e, company) => {
     e.preventDefault()
-  
+
     try {
-      await addCompany({variables: {...company} })
+      await updateCompany({variables: {...company} })
       handleSave(company)
     }
     catch (err) {
@@ -22,11 +22,11 @@ const NewCompany = ({handleSave}) => {
   return (
     <div>
       <div className={styles.dialogTitle}>Update company</div>
-      <CompanyForm handleSubmit={handleSubmit} />
+      <CompanyForm handleSubmit={handleSubmit} company={company} />
       <div>{loading && 'Loading...'}</div>
       <div className={styles.errorMessage}>{error && error.message}</div>
     </div>
   )
 }
 
-export default NewCompany
+export default UpdateCompany
