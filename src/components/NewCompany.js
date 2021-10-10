@@ -21,7 +21,7 @@ const NewCompany = ({handleSave}) => {
 
   return (
     <div>
-      <div className={styles.dialogTitle}>Update company</div>
+      <div className={styles.dialogTitle}>Add new company</div>
       <CompanyForm handleSubmit={handleSubmit} />
       <div>{loading && 'Loading...'}</div>
       <div className={styles.errorMessage}>{error && error.message}</div>
