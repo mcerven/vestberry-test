@@ -103,10 +103,20 @@ body {
     color: white;
 }
 
+.iconButton {
+    color: var(--text-color-primary);
+    cursor: pointer;
+}
+
 .actions {
     padding: 20px 0;
     display: flex;
     justify-content: center;
+}
+
+.errorMessage {
+    padding: 15px;
+    color: rgb(182, 21, 0);
 }
 
 .companySectors {

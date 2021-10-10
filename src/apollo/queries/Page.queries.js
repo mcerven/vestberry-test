@@ -20,3 +20,13 @@ export const ADD_COMPANY = gql`
       investmentSize
     }
   }`
+
+export const DELETE_COMPANY = gql`
+  mutation DELETE_COMPANY ($id: ID!) {
+    deleteCompany(id: $id) {
+      name
+      stage
+      sector
+      investmentSize
+    }
+  }`

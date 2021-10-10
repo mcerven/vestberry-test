@@ -41,7 +41,7 @@ const CompanyType = new GraphQLObjectType({
   },
 })
 
-const companies = [...Array(Math.round(Math.random() * 3 + 1)).keys()]
+let companies = [...Array(Math.round(Math.random() * 3 + 1)).keys()]
   .map((_, id) => ({
     id,
     name: casual.company_name,
@@ -98,6 +98,15 @@ const addCompany = (obj, company) => {
   return company
 }
 
+const deleteCompany = (obj, {id}) => {
+  const company = companies.find(c => c.id == id)
+  if (company === undefined) {
+    throw new GraphQLError(`Company with id '${id}' does not exist`)
+  }
+  companies = companies.filter(c => c.id != id)
+  return company
+}
+
 const mutation = new GraphQLObjectType({
   name: 'Mutation',
   description: '...',
@@ -123,6 +132,16 @@ const mutation = new GraphQLObjectType({
         },
       },
       resolve: addCompany,
+    },
+    deleteCompany: {
+      type: CompanyType,
+      args: {
+        id: {
+          type: GraphQLID,
+          name: 'id',
+        },
+      },
+      resolve: deleteCompany,
     },
   },
 })

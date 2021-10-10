@@ -78,8 +78,8 @@ const NewCompany = ({handleCompanyAdded}) => {
           <button type="submit" className={`${styles.button} ${styles.buttonPrimary}`}>Add new company</button>
         </div>
       </form>
-      {loading && 'Loading'}
-      {error && `Error: ${error.message}`}
+      <div>{loading && 'Loading...'}</div>
+      <div className={styles.errorMessage}>{error && error.message}</div>
     </div>
   )
 }
