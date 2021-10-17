@@ -1,6 +1,8 @@
-import React, {Suspense} from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import sectors from '../../common/models/sectors'
 import styles from 'App.scss'
+import CompanySector from './CompanySector'
 
 const CompaniesBySectors = ({companies}) => {
   return (
@@ -24,28 +26,8 @@ const CompaniesBySectors = ({companies}) => {
   )
 }
 
-export default CompaniesBySectors
-
-const CompanySector = ({sector, count}) => {
-  if (!sector) return null
-
-  const Icon = React.lazy(() => import(`../../Assets/Assetts/Icons/ico_${sector.toLowerCase()}.svg`))
-
-  return (
-    <div className={styles.companySector}>
-      <div className={styles.companySectorContent}>
-        <div className={styles.companySectorCount}>
-          {count}
-        </div>
-        <div className={styles.companySectorText}>
-          {sector}
-        </div>
-        <div className={styles.companySectorText}>
-          <Suspense fallback={<div>Loading...</div>}>
-            <Icon width="28" height="28" />
-          </Suspense>
-        </div>
-      </div>
-    </div>
-  )
+CompaniesBySectors.propTypes = {
+  companies: PropTypes.array.isRequired,
 }
+
+export default CompaniesBySectors

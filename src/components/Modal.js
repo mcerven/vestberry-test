@@ -1,7 +1,8 @@
 import React, {useRef} from 'react'
+import PropTypes from 'prop-types'
 import styles from '../App.scss'
 
-const Modal = ({children, handleClose}) => {
+const Modal = ({handleClose, children}) => {
   const dialogRef = useRef(null)
 
   const handleBackdropClick = (e) => {
@@ -18,6 +19,11 @@ const Modal = ({children, handleClose}) => {
       </div>
     </div>
   )
+}
+
+Modal.propTypes = {
+  handleClose: PropTypes.func.isRequired,
+  children: PropTypes.element,
 }
 
 export default Modal

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styles from 'App.scss'
 
 const numberFormat = new Intl.NumberFormat('sk-SK')
@@ -20,6 +21,18 @@ export const CompanyTableRow = ({company, handleShowUpdateCompanyModal, handleDe
       <td />
     </tr>
   )
+}
+
+CompanyTableRow.propTypes = {
+  company: PropTypes.shape({
+    id: PropTypes.any.isRequired,
+    name: PropTypes.string.isRequired,
+    stage: PropTypes.string.isRequired,
+    sector: PropTypes.string.isRequired,
+    investmentSize: PropTypes.number.isRequired,
+  }).isRequired,
+  handleShowUpdateCompanyModal: PropTypes.func.isRequired,
+  handleDelete: PropTypes.func.isRequired,
 }
 
 export default CompanyTableRow

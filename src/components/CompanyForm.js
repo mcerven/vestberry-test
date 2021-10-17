@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import PropTypes from 'prop-types'
 import stages from '../../common/models/stages'
 import sectors from '../../common/models/sectors'
 import styles from 'App.scss'
@@ -22,7 +23,10 @@ const CompanyForm = ({handleSubmit, company = null}) => {
       <div className={styles.formField}>
         <label>
           <span>Company name</span>
-          <input type="text" placeholder="Company name" value={name} onChange={e => setName(e.target.value)} required />
+          <input
+            type="text" placeholder="Company name"
+            value={name} onChange={e => setName(e.target.value)} required
+          />
         </label>
       </div>
       <div className={styles.formField}>
@@ -47,7 +51,10 @@ const CompanyForm = ({handleSubmit, company = null}) => {
         <label>
           <span>Investment size</span>
           <div style={{position: 'relative'}}>
-            <input type="number" placeholder="Investment size" value={investmentSize} onChange={e => setInvestmentSize(e.target.value)} required />
+            <input
+              type="number" placeholder="Investment size"
+              value={investmentSize} onChange={e => setInvestmentSize(e.target.value)} required
+            />
             <div className={styles.placeholderRight}>EUR</div>
           </div>
         </label>
@@ -57,6 +64,17 @@ const CompanyForm = ({handleSubmit, company = null}) => {
       </div>
     </form>
   )
+}
+
+CompanyForm.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+  company: PropTypes.shape({
+    id: PropTypes.any.isRequired,
+    name: PropTypes.string.isRequired,
+    stage: PropTypes.string.isRequired,
+    sector: PropTypes.string.isRequired,
+    investmentSize: PropTypes.number.isRequired,
+  }),
 }
 
 export default CompanyForm

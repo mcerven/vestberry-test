@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import PropTypes from 'prop-types'
 import Modal from './Modal'
 import NewCompany from './NewCompany'
 import UpdateCompany from './UpdateCompany'
@@ -54,7 +55,12 @@ const CompaniesTable = ({companies, refetch}) => {
           </thead>
           <tbody>
             {companies.map((company) =>
-              <CompanyTableRow key={company.id} company={company} handleShowUpdateCompanyModal={handleShowUpdateCompanyModal} handleDelete={handleDeleteCompany} />
+              <CompanyTableRow
+                key={company.id}
+                company={company}
+                handleShowUpdateCompanyModal={handleShowUpdateCompanyModal}
+                handleDelete={handleDeleteCompany}
+              />
             )}
           </tbody>
         </table>
@@ -75,6 +81,11 @@ const CompaniesTable = ({companies, refetch}) => {
       </div>
     </div>
   )
+}
+
+CompaniesTable.propTypes = {
+  companies: PropTypes.array.isRequired,
+  refetch: PropTypes.func.isRequired,
 }
 
 export default CompaniesTable

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import {Chart} from 'react-google-charts'
 import styles from 'App.scss'
 
@@ -36,6 +37,10 @@ const InvestmentSize = ({companies}) => {
       </div>
     </div>
   )
+}
+
+InvestmentSize.propTypes = {
+  companies: PropTypes.array.isRequired,
 }
 
 export default InvestmentSize

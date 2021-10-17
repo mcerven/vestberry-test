@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import {useMutation} from '@apollo/client'
 import {ADD_COMPANY} from '../apollo/queries/Page.queries'
 import styles from 'App.scss'
@@ -26,6 +27,10 @@ const NewCompany = ({handleSave}) => {
       <div className={styles.errorMessage}>{error && error.message}</div>
     </div>
   )
+}
+
+NewCompany.propTypes = {
+  handleSave: PropTypes.func.isRequired,
 }
 
 export default NewCompany
