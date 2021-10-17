@@ -9,12 +9,11 @@ const NewCompany = ({handleSave}) => {
 
   const handleSubmit = async (e, company) => {
     e.preventDefault()
-  
+
     try {
-      await addCompany({variables: {...company} })
+      await addCompany({variables: {...company}})
       handleSave(company)
-    }
-    catch (err) {
+    } catch (err) {
       console.error(err)
     }
   }

@@ -1,5 +1,5 @@
-import React, { Suspense } from 'react'
-import sectors from "../../common/models/sectors"
+import React, {Suspense} from 'react'
+import sectors from '../../common/models/sectors'
 import styles from 'App.scss'
 
 const CompaniesBySectors = ({companies}) => {
@@ -11,11 +11,12 @@ const CompaniesBySectors = ({companies}) => {
       <div className={styles.sectionContent}>
         <div className={styles.companySectors}>
           {
-            sectors.map(sector => 
+            sectors.map(sector =>
               <CompanySector
                 key={sector}
                 sector={sector}
-                count={companies.filter(c => c.sector === sector).length} />)
+                count={companies.filter(c => c.sector === sector).length}
+              />)
           }
         </div>
       </div>

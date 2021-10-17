@@ -1,11 +1,11 @@
 import React from 'react'
-import { Chart } from "react-google-charts"
+import {Chart} from 'react-google-charts'
 import styles from 'App.scss'
 
 const InvestmentSize = ({companies}) => {
   const chartData = [
     ['Company', 'Investment size'],
-    ...companies.map(c => [c.name, c.investmentSize])
+    ...companies.map(c => [c.name, c.investmentSize]),
   ]
 
   return (

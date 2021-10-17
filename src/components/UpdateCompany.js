@@ -11,10 +11,9 @@ const UpdateCompany = ({handleSave, company}) => {
     e.preventDefault()
 
     try {
-      await updateCompany({variables: {...company} })
+      await updateCompany({variables: {...company}})
       handleSave(company)
-    }
-    catch (err) {
+    } catch (err) {
       console.error(err)
     }
   }

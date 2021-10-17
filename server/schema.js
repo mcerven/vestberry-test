@@ -8,8 +8,8 @@ const {
   GraphQLError,
 } = require('graphql')
 const casual = require('casual')
-const sectors = require('../common/models/sectors');
-const stages = require('../common/models/stages');
+const sectors = require('../common/models/sectors')
+const stages = require('../common/models/stages')
 
 const CompanyType = new GraphQLObjectType({
   name: 'Company',
@@ -79,7 +79,7 @@ const query = new GraphQLObjectType({
 })
 
 const addCompany = (obj, company) => {
-  validateCompany(company);
+  validateCompany(company)
   companies.push({
     ...company,
     id: Math.round(Math.random() * 10000000),
@@ -88,14 +88,14 @@ const addCompany = (obj, company) => {
 }
 
 const updateCompany = (obj, company) => {
-  const dbCompany = findCompanyById(company.id);
-  validateCompany(company);
+  const dbCompany = findCompanyById(company.id)
+  validateCompany(company)
   Object.assign(dbCompany, company)
   return company
 }
 
 const deleteCompany = (obj, {id}) => {
-  const dbCompany = findCompanyById(id);
+  const dbCompany = findCompanyById(id)
   companies = companies.filter(c => c.id != id)
   return dbCompany
 }
@@ -167,25 +167,25 @@ const mutation = new GraphQLObjectType({
 
 const validateCompany = (company) => {
   if (company.name.length <= 2) {
-    throw new GraphQLError('Company name has to be longer than 2 characters');
+    throw new GraphQLError('Company name has to be longer than 2 characters')
   }
   if (stages.indexOf(company.stage) === -1) {
-    throw new GraphQLError('Company stage must be in the list');
+    throw new GraphQLError('Company stage must be in the list')
   }
   if (sectors.indexOf(company.sector) === -1) {
-    throw new GraphQLError('Company sector must be in the list');
+    throw new GraphQLError('Company sector must be in the list')
   }
   if (company.investmentSize < 0) {
-    throw new GraphQLError('Investment size has to be positive number');
+    throw new GraphQLError('Investment size has to be positive number')
   }
 }
 
 const findCompanyById = (id) => {
-  const dbCompany = companies.find(c => c.id == id);
+  const dbCompany = companies.find(c => c.id == id)
   if (!dbCompany) {
-    throw new GraphQLError(`Company with id '${id}' does not exist`);
+    throw new GraphQLError(`Company with id '${id}' does not exist`)
   }
-  return dbCompany;
+  return dbCompany
 }
 
 const schema = new GraphQLSchema({

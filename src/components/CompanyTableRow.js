@@ -1,10 +1,10 @@
-import React from 'react';
-import styles from 'App.scss';
+import React from 'react'
+import styles from 'App.scss'
 
 const numberFormat = new Intl.NumberFormat('sk-SK')
 const numberToCurrency = (value) => `${numberFormat.format(value)} EUR`
 
-export const CompanyTableRow = ({ company, handleShowUpdateCompanyModal, handleDelete }) => {
+export const CompanyTableRow = ({company, handleShowUpdateCompanyModal, handleDelete}) => {
   return (
     <tr key={company.id}>
       <td />

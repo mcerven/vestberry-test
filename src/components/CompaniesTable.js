@@ -7,12 +7,12 @@ import styles from 'App.scss'
 import {useMutation} from '@apollo/client'
 import {DELETE_COMPANY} from '../apollo/queries/Page.queries'
 
-const CompaniesTable = ({ companies, refetch }) => {
+const CompaniesTable = ({companies, refetch}) => {
   const [selectedCompany, setSelectedCompany] = useState(null)
   const [showNewCompanyModal, setShowNewCompanyModal] = useState(false)
   const [showUpdateCompanyModal, setShowUpdateCompanyModal] = useState(false)
   const [deleteCompany, {error}] = useMutation(DELETE_COMPANY)
-  
+
   const handleNewCompanyModalClose = () => setShowNewCompanyModal(false)
   const handleNewCompanySaved = () => {
     refetch()
@@ -30,10 +30,9 @@ const CompaniesTable = ({ companies, refetch }) => {
 
   const handleDeleteCompany = async (id) => {
     try {
-      await deleteCompany({ variables: { id } })
+      await deleteCompany({variables: {id}})
       refetch()
-    }
-    catch (err) {
+    } catch (err) {
       console.error(err)
     }
   }
@@ -54,7 +53,7 @@ const CompaniesTable = ({ companies, refetch }) => {
             </tr>
           </thead>
           <tbody>
-            {companies.map((company) => 
+            {companies.map((company) =>
               <CompanyTableRow key={company.id} company={company} handleShowUpdateCompanyModal={handleShowUpdateCompanyModal} handleDelete={handleDeleteCompany} />
             )}
           </tbody>
@@ -64,16 +63,14 @@ const CompaniesTable = ({ companies, refetch }) => {
           <button className={styles.button} onClick={() => setShowNewCompanyModal(true)}>Add new company</button>
         </div>
         <div className="modals">
-          { showNewCompanyModal && 
+          {showNewCompanyModal &&
             <Modal handleClose={handleNewCompanyModalClose}>
               <NewCompany handleSave={handleNewCompanySaved} />
-            </Modal>
-          }
-          { showUpdateCompanyModal && 
+            </Modal>}
+          {showUpdateCompanyModal &&
             <Modal handleClose={handleUpdateCompanyModalClose}>
               <UpdateCompany handleSave={handleUpdateCompanySaved} company={selectedCompany} />
-            </Modal>
-          }
+            </Modal>}
         </div>
       </div>
     </div>

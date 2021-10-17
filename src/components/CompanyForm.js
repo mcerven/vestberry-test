@@ -3,7 +3,7 @@ import stages from '../../common/models/stages'
 import sectors from '../../common/models/sectors'
 import styles from 'App.scss'
 
-const CompanyForm = ({handleSubmit, company = null}) => {  
+const CompanyForm = ({handleSubmit, company = null}) => {
   const [name, setName] = useState(company?.name ?? '')
   const [stage, setStage] = useState(company?.stage ?? '')
   const [sector, setSector] = useState(company?.sector ?? '')
@@ -46,7 +46,7 @@ const CompanyForm = ({handleSubmit, company = null}) => {
       <div className={styles.formField}>
         <label>
           <span>Investment size</span>
-          <div style={{ position: 'relative' }}>
+          <div style={{position: 'relative'}}>
             <input type="number" placeholder="Investment size" value={investmentSize} onChange={e => setInvestmentSize(e.target.value)} required />
             <div className={styles.placeholderRight}>EUR</div>
           </div>
